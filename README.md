@@ -13,5 +13,7 @@ The ultimate purpose of analyzing this dataset is to prevent future suicide. Hen
 3. What does your audience want to learn from your data?  Please list out at least 3 specific questions that your project will answer for your audience.
 
 -Question 1: How does the change in GDP per capita affect the suicide rates? Do developed countries and developing countries tend to have the same relationship between GDP per capita and suicide rates.
+
 -Question 2:
--Question 3: 
+
+-Question 3:
