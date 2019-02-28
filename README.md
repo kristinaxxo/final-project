@@ -42,6 +42,7 @@
  &nbsp;&nbsp;&nbsp;&nbsp;library(sunburstR)
 
  - What major challenges do you anticipate?
+ 
  &nbsp;&nbsp;&nbsp;&nbsp;We might have merge conflicts and be not very comfortable with the new libraries. Also, when making charts, we might have difficulties in finding the proper or correct correlations while analyzing the data.
 
 
