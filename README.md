@@ -16,7 +16,8 @@
 
  - Question 2: How have the **suicide rate** in different **country/age group/generation/etc** changed over time
 
- - Question 3:
+ - Question 3: How **age groups contributes** the suicide rate differently in the each **state** ? We might use the pie chart to show the suicide rate by different age group and it will change by different state you select.
+
 
 ## Technical Description
  - How will you be reading in your data (i.e., are you using an API, or is it a static .csv/.json file)?
@@ -28,8 +29,16 @@
  &nbsp;&nbsp;&nbsp;&nbsp;Since the dataset we obtained is relatively clean and organized, all that we need to do for this data set is reformatting, reshaping, and regrouping. After that, we should be good to go.
 
  - What (major/new) libraries will be using in this project (no need to list common libraries that are used in many projects such as dplyr)
+ library(tidyverse)
+ &nbsp;&nbsp;&nbsp;&nbsp;library(psych)
+ &nbsp;&nbsp;&nbsp;&nbsp;library(effsize)
+ &nbsp;&nbsp;&nbsp;&nbsp;library(ggplot2)
+ &nbsp;&nbsp;&nbsp;&nbsp;library(ggiraph)
+ &nbsp;&nbsp;&nbsp;&nbsp;library(leaflet)
+ &nbsp;&nbsp;&nbsp;&nbsp;library(gganimate)
+ &nbsp;&nbsp;&nbsp;&nbsp;library(highcharter)
+ &nbsp;&nbsp;&nbsp;&nbsp;library(sunburstR)
 
  - What major challenges do you anticipate?
 
  - Not required, but optional: what questions, if any, will you be answering with statistical analysis/machine learning?
- 
