@@ -28,15 +28,15 @@
 
  &nbsp;&nbsp;&nbsp;&nbsp;Since the dataset we obtained is relatively clean and organized, all that we need to do for this data set is reformatting, reshaping, and regrouping. After that, we should be good to go.
 
- - What (major/new) libraries will be using in this project (no need to list common libraries that are used in many projects such as dplyr)
- library(tidyverse)
- &nbsp;&nbsp;&nbsp;&nbsp;library(psych)
- &nbsp;&nbsp;&nbsp;&nbsp;library(effsize)
- &nbsp;&nbsp;&nbsp;&nbsp;library(ggplot2)
- &nbsp;&nbsp;&nbsp;&nbsp;library(ggiraph)
- &nbsp;&nbsp;&nbsp;&nbsp;library(leaflet)
- &nbsp;&nbsp;&nbsp;&nbsp;library(gganimate)
- &nbsp;&nbsp;&nbsp;&nbsp;library(highcharter)
+ - What (major/new) libraries will be using in this project (no need to list common libraries that are used in many projects such as dplyr) <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;library(tidyverse)<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;library(psych) <br>
+ &nbsp;&nbsp;&nbsp;&nbsp;library(effsize)<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;library(ggplot2)<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;library(ggiraph)<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;library(leaflet)<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;library(gganimate)<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;library(highcharter)<br>
  &nbsp;&nbsp;&nbsp;&nbsp;library(sunburstR)
 
  - What major challenges do you anticipate?
