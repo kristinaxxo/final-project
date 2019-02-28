@@ -18,7 +18,7 @@
 
  - Question 3: How **age groups contributes** the suicide rate differently in the each **state** ? We might use the pie chart to show the suicide rate by different age group and it will change by different state you select.
 
- - Question 4: What can we _assume_ about **mental health care** of the countries based on the relationship between **suicide rate** and **gdp per capita** or **human development index**?
+ - Question 4: What can we _assume_ about **mental health care** development of the countries based on the relationship between **suicide rate** and **gdp per capita** or **human development index**?
 
 
 ## Technical Description
