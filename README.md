@@ -18,6 +18,8 @@
 
  - Question 3: How **age groups contributes** the suicide rate differently in the each **state** ? We might use the pie chart to show the suicide rate by different age group and it will change by different state you select.
 
+ - Question 4: What can we _assume_ about **mental health care** of the countries based on the relationship between **suicide rate** and **gdp per capita** or **human development index**?
+
 
 ## Technical Description
  - How will you be reading in your data (i.e., are you using an API, or is it a static .csv/.json file)?
@@ -40,5 +42,6 @@
  &nbsp;&nbsp;&nbsp;&nbsp;library(sunburstR)
 
  - What major challenges do you anticipate?
+ &nbsp;&nbsp;&nbsp;&nbsp;We might have merge conflicts and be not very comfortable with the new libraries. Also, when making charts, we might have difficulties in finding the proper or correct correlations while analyzing the data.
 
- - Not required, but optional: what questions, if any, will you be answering with statistical analysis/machine learning?
+
