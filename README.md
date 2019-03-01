@@ -8,7 +8,7 @@
 
 2. Who is your target audience?  Depending on the domain of your data, there may be a variety of audiences interested in using the dataset.  You should hone in on one of these audiences.
 
-  &nbsp;&nbsp;&nbsp;&nbsp;The ultimate purpose of analyzing this dataset is to prevent future suicide. Hence, our main target audience would be any non-profit organizations that have the goal of reducing suicide rates, mentors at school and therapies who specialize on this subject.
+  &nbsp;&nbsp;&nbsp;&nbsp;The ultimate purpose of analyzing this dataset is to **prevent future suicide**. Hence, our main target audience would be any _non-profit organizations_ that have the goal of reducing suicide rates, _mentors_ at school and _therapies_ who specialize on this subject.
 
 3. What does your audience want to learn from your data?  Please list out at least 3 specific questions that your project will answer for your audience.
 
@@ -24,25 +24,26 @@
 ## Technical Description
 4. How will you be reading in your data (i.e., are you using an API, or is it a static .csv/.json file)?
 
- &nbsp;&nbsp;&nbsp;&nbsp;We would download our dataset from Kaggle.com as a .csv file. So we would read in a static .csv file for this project
+ &nbsp;&nbsp;&nbsp;&nbsp;We would download our dataset from [kaggle](https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016) as a .csv file. So we would read in a static .csv file for this project
 
 5. What types of data-wrangling (reshaping, reformatting, etc.) will you need to do to your data?
 
  &nbsp;&nbsp;&nbsp;&nbsp;Since the dataset we obtained is relatively clean and organized, all that we need to do for this data set is reformatting, reshaping, and regrouping. After that, we should be good to go.
 
-6. What (major/new) libraries will be using in this project (no need to list common libraries that are used in many projects such as dplyr) <br>
- &nbsp;&nbsp;&nbsp;&nbsp;library(tidyverse)<br>
- &nbsp;&nbsp;&nbsp;&nbsp;library(psych) <br>
- &nbsp;&nbsp;&nbsp;&nbsp;library(effsize)<br>
- &nbsp;&nbsp;&nbsp;&nbsp;library(ggplot2)<br>
- &nbsp;&nbsp;&nbsp;&nbsp;library(ggiraph)<br>
- &nbsp;&nbsp;&nbsp;&nbsp;library(leaflet)<br>
- &nbsp;&nbsp;&nbsp;&nbsp;library(gganimate)<br>
- &nbsp;&nbsp;&nbsp;&nbsp;library(highcharter)<br>
- &nbsp;&nbsp;&nbsp;&nbsp;library(sunburstR)
+6. What (major/new) libraries will be using in this project (no need to list common libraries that are used in many projects such as ```dplyr```
+ ```
+ library(tidyverse)
+ library(psych)
+ library(effsize)
+ library(ggplot2)
+ library(ggiraph)
+ library(leaflet)
+ library(gganimate)
+ library(highcharter)
+ library(sunburstR)
+ ```
+
 
 7. What major challenges do you anticipate?
- 
+
  &nbsp;&nbsp;&nbsp;&nbsp;We might have merge conflicts and be not very comfortable with the new libraries. Also, when making charts, we might have difficulties in finding the proper or correct correlations while analyzing the data.
-
-
