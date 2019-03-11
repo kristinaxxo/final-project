@@ -1,4 +1,3 @@
-
 library("shiny")
 library("shinydashboard")
 
@@ -15,31 +14,39 @@ sidebar <- dashboardSidebar(
 body <- dashboardBody(
   tabItems(
     tabItem(tabName = "Introduction",
-            h2("Introduction tab content"),
-            h6("Episode IV", align = "center"),
-            h6("A NEW HOPE", align = "center"),
-            h5("It is a period of civil war.", align = "center"),
-            h4("Rebel spaceships, striking", align = "center"),
-            h3("from a hidden base, have won", align = "center"),
-            h2("their first victory against the", align = "center"),
-            h1("evil Galactic Empire.", align = "center"),
-            sliderInput("obs",
-                        "Number of observations:",
-                        min = 0,
-                        max = 1000,
-                        value = 500),
-            fluidRow(
-              box( h2("BOX  content"),
-                   solidHeader = TRUE,
-                   collapsible = TRUE,
-                   title = "Histogram", status = "primary"),
-              
-              box(
-                "Box content here", br(), "More box content",
-                sliderInput("slider", "Slider input:", 1, 100, 50),
-                textInput("text", "Text input:")
-              )
-            )
+            h2("The Facts on Suicide"),
+            p("The action of sucide typically involves strong emotional repercussions not
+    only affecting victims themsevles but also affecting surrounding people.
+    It is reported that approximately one million people die from suicide by 
+    The World Health Organisation(WHO) and it is considered as one of the three
+    leading causes of death worldwide. The cause for suicide varies including 
+    xxx, and certain groups tend to commit suicide more frequent than others."),
+            h2("Insight of suicide worldwide"),
+            p("In every country, the number of people who commit suicides are
+              substantial. The bar graph below gives a general overivew on the
+              total number of people died from suicide from 1985 to 2016 in each
+              country where the data could be collected."),
+            plotlyOutput("bargraph"),
+            br(),
+            h2("What is our purpose?"),
+            p("The ultimate purpose of analyzing this dataset is to prevent
+              future suicide by finding out the cause to suicide based on the
+              dataset we used. Alternatively, we also provide a prediction on
+              the suicide rate with respect to given conditions."),
+            h2("Analysis Overview"),
+            h4("Data Overview"),
+            tags$ul(
+              tags$li("first aspect"), 
+              tags$li("Second list item"), 
+              tags$li("Third list item")
+            ),
+            h3("Who Are We?"),
+            p("This project was made by Yinan Guo, Song Xue, Rita Wu,
+              Badmaarag Batjargal as the final project for the course Info 201."),
+            tags$a(href = "https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016",
+                   "Where we acquire the data: Click here!")
+        
+            
     ),
     
     tabItem(tabName = "widgets",
@@ -69,9 +76,11 @@ body <- dashboardBody(
 
 ## ui code starts here
 ui <- fluidPage(
+   includeCSS("custom.css"),
   dashboardPage(
-    dashboardHeader(title = "Final Project"),
+    dashboardHeader(title = "Suicide Analysis"),
     sidebar,
     body
-  )
 )
+)
+
