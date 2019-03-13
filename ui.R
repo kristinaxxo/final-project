@@ -7,7 +7,8 @@ sidebar <- dashboardSidebar(
     menuItem("Widgets", icon = icon("th"), tabName = "widgets",
              badgeLabel = "new", badgeColor = "green"),
     menuItem("Original Codes", icon = icon("file-code-o"), 
-             href = "https://github.com/rstudio/shinydashboard/")
+             href = "https://github.com/rstudio/shinydashboard/"),
+    menuItem("Age", tabName = "Age", icon = icon("th"))
   )
 )
 
@@ -48,7 +49,6 @@ body <- dashboardBody(
         
             
     ),
-    
     tabItem(tabName = "widgets",
             h2("Widgets tab content"),
             p("p creates a paragraph of text."),
@@ -62,14 +62,37 @@ body <- dashboardBody(
             p("span does the same thing as div, but it works with",
               span("groups of words", style = "color:blue"),
               "that appear inside a paragraph."),
-            selectInput("select_state", label = h3("Select box"), 
-                        choices = list("Illinoise" = 1, "Michigan" = 2, "Indiana" = 3, 
-                                       "Wisconsin" = 4, "Ohio" = 5), 
+            selectInput("select_state", label = h3("Select box"),
+                        choices = list("Illinoise" = 1, "Michigan" = 2, "Indiana" = 3,
+                                       "Wisconsin" = 4, "Ohio" = 5),
                         selected = 1),
-            
+
             hr(),
             fluidRow(column(3, verbatimTextOutput("value")))
+    ),
+    # Rita
+    tabItem(tabName = "Age",
+            h2("The "),
+            p("m.hshtamh"),
+            selectInput("sex", 
+                        label = "Sex",
+                        choices = list("female", "male"),
+                        selected = "female"),
+            selectInput("year",
+                        label = "Year",
+                        choices = c(1987 : 2016),
+                        selected = "1987"),
+            plotOutput("mapPlot"),
+            
+            ##age change trend during years
+            selectInput("age",
+                        label = "Age Group",
+                        choices = list("5-14 years","15-24 years", "25-34 years", 
+                                       "35-54 years", "55-74 years", "75+ years"),
+                        selected = "5-14 years"),
+            plotOutput("barPlot")
     )
+
   )
 )
 
