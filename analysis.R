@@ -116,7 +116,7 @@ mapData <- function(inputSex, inputYear) {
     ) +
     # hrbrthemes::theme_ipsum() +
     colormap::scale_fill_colormap(
-      colormap = colormap::colormaps$greens, reverse = T
+      colormap = colormap::colormaps$copper, reverse = T
     ) +
     labs(
       title = "The Suicide Number Around World", subtitle = "number of people",

@@ -98,7 +98,7 @@ body <- dashboardBody(
         choices = c(1987:2016),
         selected = "1987"
       ),
-      # plotOutput("mapPlot"),
+     plotOutput("mapPlot"),
 
       ## age change trend during years
       selectInput("age",
@@ -108,8 +108,8 @@ body <- dashboardBody(
           "35-54 years", "55-74 years", "75+ years"
         ),
         selected = "5-14 years"
-      )
-      # plotOutput("barPlot")
+      ),
+     plotOutput("barPlot")
     )
   )
 )
