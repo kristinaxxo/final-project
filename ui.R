@@ -51,7 +51,7 @@ body <- dashboardBody(
               Badmaarag Batjargal as the final project for the course Info 201."),
       tags$a(
         href = "https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016",
-        "Where we acquire the data: Click here!"
+        "Source of data: Click here!"
       )
     ),
     tabItem(
