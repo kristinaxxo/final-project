@@ -57,9 +57,9 @@ The World Health Organisation(WHO) and it is considered as one of the three
       h2("Analysis Overview"),
       h4("Data Overview"),
       tags$ul(
-        tags$li("first aspect"),
-        tags$li("Second list item"),
-        tags$li("Third list item")
+        tags$li("Age and Sex"),
+        tags$li("GDP and HDI"),
+        tags$li("Prediction on Suicide")
       ),
       h3("Who Are We?"),
       p(
