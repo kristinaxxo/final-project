@@ -5,7 +5,6 @@ library("ggplot2")
 library("styler")
 library("lintr")
 library("rsconnect")
-#library("sp")
 library("ggiraph")
 library("colormap")
 
@@ -17,15 +16,24 @@ overview_analysis <- suicide %>%
   group_by(country) %>%
   summarize(
     sum(suicides_no)
+  ) %>% 
+  top_n(10) %>% 
+  arrange(-`sum(suicides_no)`)
+
+overview_analysis$country <- factor(
+  overview_analysis$country,
+  levels = as.character(overview_analysis$country)
   )
+
 overview <- plot_ly(overview_analysis,
-  x = ~country, y = ~`sum(suicides_no)`, type = "bar",
+  x = ~country, y = ~`sum(suicides_no)`, type = "bar", 
   marker = list(color = "pink")
 ) %>%
   layout(
-    title = "The total number of people who commit suicide from 1985 to 2016
-    worldwide",
-    xaxis = list(title = "Country"), yaxis = list(title = "Number of People")
+    title = "The top 10 countries that have most people died from suicide from
+    1986 to 2016",
+    xaxis = list(title = "Country"),
+    yaxis = list(title = "Number of Suicide People")
   )
 
 ###### bar chart########
