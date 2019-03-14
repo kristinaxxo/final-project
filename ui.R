@@ -7,9 +7,9 @@ sidebar <- dashboardSidebar(
     menuItem(
       "Introduction", tabName = "Introduction", icon = icon("dashboard")
              ),
-    menuItem("Age", tabName = "Age", icon = icon("th")),
+    menuItem("Age and Area", tabName = "Age", icon = icon("globe-asia")),
     menuItem(
-      "HDI_and_GDP", tabName = "HDI_and_GDP", icon = icon("dollar-sign")
+      "HDI and GDP", tabName = "HDI_and_GDP", icon = icon("dollar-sign")
              ),
     menuItem("Animation and Prediction",
       icon = icon("chart-line"),
@@ -63,33 +63,60 @@ strong(class = "name", "Yinan Guo, Song Xue, Rita Wu,
       )
     ),
     # Rita
-    tabItem(
-      tabName = "Age",
-      h2("The "),
-      p("m.hshtamh"),
-      selectInput("sex",
-        label = "Sex",
-        choices = list("female", "male"),
-        selected = "female"
-      ),
-      selectInput("year",
-        label = "Year",
-        choices = c(1987:2016),
-        selected = "1987"
-      ),
-      plotOutput("mapPlot"),
-
-      ## age change trend during years
-      selectInput("age",
-        label = "Age Group",
-        choices = list(
-          "5-14 years", "15-24 years", "25-34 years",
-          "35-54 years", "55-74 years", "75+ years"
-        ),
-        selected = "5-14 years"
-      ),
-      plotOutput("barPlot")
-    ),
+# Rita
+tabItem(
+  tabName = "Age",
+  h2("The big numbers about suicide"),
+  p("Close to 800 000 people die due to suicide every year, which is one person every 40 seconds. 
+    Suicide is a global phenomenon and occurs throughout the lifespan. Effective and evidence-based 
+    interventions can be implemented at population, sub-population and individual levels to prevent 
+    suicide and suicide attempts. There are indications that for each adult who died by suicide there 
+    may have been more than 20 others attempting suicide."),
+  h2("Worldwide suicide rates for men and women over the past 30 years"),
+  p("The maps shows the suicide amount of countries from 1987 to 2016 which divided by gender. The color more
+    darker means more people chose suicide during that year."),
+  br(),
+  p("(Some of countries's suicide amount undefined.)"),
+  selectInput("sex",
+              label = "Sex",
+              choices = list("female", "male"),
+              selected = "female"
+  ),
+  selectInput("year",
+              label = "Year",
+              choices = c(1987:2016),
+              selected = "1987"
+  ),
+  plotOutput("mapPlot"),
+  
+  
+  h2("The suicide rate by different age groups"),
+  p("The chart shows how the different age groups' suicide rate changed during 30 years. 
+    Suicide occurs throughout the lifespan and is the second leading cause of death among 15-29 year olds globally."),
+  ## age change trend during years
+  selectInput("age",
+              label = "Age Group",
+              choices = list(
+                "5-14 years", "15-24 years", "25-34 years",
+                "35-54 years", "55-74 years", "75+ years"
+              ),
+              selected = "5-14 years"
+  ),
+  plotOutput("barPlot"),
+  
+  h2("The information we know"),
+  h4("From geographic position"),
+  tags$ul(
+    tags$li("In Europe, USA, Russia are the highest suicide rates are reported for both men and women."),
+    tags$li("The Eastern Mediterranean Region and Central Asia republics have the lowest suicide rates."),
+    tags$li("There are not major different about suicide number for each year.")),
+  h4("From age group."),
+  tags$ul(
+    tags$li("suicide rates have traditionally been highest amongst elderly males, rates among young people have been increasing 
+              a lot."),
+    tags$li("Males are four times more likely to die from suicide than are females."),
+    tags$li("Although suicide is a serious problem among the young and adults, death rates continue to be highest among older adults ages 75 years and over."))
+  ),
 
     # Badmaarag
     tabItem(

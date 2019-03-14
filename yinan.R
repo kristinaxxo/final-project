@@ -190,3 +190,4 @@ plot_animated <- function (x_axis = "gdp_per_capita ($)",
 
   
 }
+
