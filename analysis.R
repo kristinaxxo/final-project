@@ -7,26 +7,31 @@ library("lintr")
 library("rsconnect")
 library("ggiraph")
 library("colormap")
+library("lintr")
 
 # Read in dataset from local desktop
 suicide <- read.csv("data/master.csv", stringsAsFactors = FALSE)
 
-# Graph of top 10 countries with the most people killed from suicide 
+year_range <- range(suicide$year)
+
+selected_value <- suicide$year
+
+# Graph of top 10 countries with the most people killed from suicide
 overview_analysis <- suicide %>%
   group_by(country) %>%
   summarize(
     sum(suicides_no)
-  ) %>% 
-  top_n(10) %>% 
+  ) %>%
+  top_n(10) %>%
   arrange(-`sum(suicides_no)`)
 
 overview_analysis$country <- factor(
   overview_analysis$country,
   levels = as.character(overview_analysis$country)
-  )
+)
 
 overview <- plot_ly(overview_analysis,
-  x = ~country, y = ~`sum(suicides_no)`, type = "bar", 
+  x = ~country, y = ~`sum(suicides_no)`, type = "bar",
   marker = list(color = "pink")
 ) %>%
   layout(
@@ -106,7 +111,8 @@ mapData <- function(inputSex, inputYear) {
   # View(map.world)
   # View(map.world_join)
   map_world_join <- map_world_join %>% mutate(fill_flg = ifelse(is.na(rank), F,
-                                                                T))
+    T
+  ))
   # View(map.world_join)
   df_country_points <- data.frame(country = mapDf$country, stringsAsFactors = F)
   # glimpse(df.country_points)
