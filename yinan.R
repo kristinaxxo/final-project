@@ -10,6 +10,8 @@ library(readr)
 library(dplyr)
 library(gganimate)
 library(countrycode)
+library("gifski")
+library("png")
 
 # Question: based on the information form past x years, can you predict
 # the suicide number in next y years?
