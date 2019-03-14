@@ -3,7 +3,6 @@ library("shinydashboard")
 library("plotly")
 library("lintr")
 
-lintr::lint("ui.R")
 sidebar <- dashboardSidebar(
   sidebarMenu(
     menuItem(
@@ -37,8 +36,9 @@ body <- dashboardBody(
         It is reported that approximately one million people die
         from suicide by
 The World Health Organisation(WHO) and it is considered as one of the three
-        leading causes of death worldwide. The cause for suicide varies including 
-        xxx, and certain groups tend to commit suicide more frequent than others."),
+      leading causes of death worldwide. The cause for suicide varies including
+        but is not limited to age, sex, GDP and HDI etc.
+      , and certain groups tend to commit suicide more frequent than others."),
       h2("Insight of suicide worldwide"),
       p(
         "In every country, the number of people who commit suicides are
@@ -69,7 +69,8 @@ The World Health Organisation(WHO) and it is considered as one of the three
         "as the final project for the course Info 201."
       ),
       tags$a(
-        href = "https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016",
+        href = "https://www.kaggle.com/russellyates88/
+        suicide-rates-overview-1985-to-2016",
         "Source of data: Click here!"
       )
     ),
@@ -80,12 +81,13 @@ The World Health Organisation(WHO) and it is considered as one of the three
       h2("The big numbers about suicide"),
       p("Close to 800 000 people die due to suicide every year, which is
 one person every 40 seconds.
-Suicide is a global phenomenon and occurs throughout the lifespan. Effective and evidence-based
+Suicide is a global phenomenon and occurs throughout the lifespan.
+Effective and evidence-based
     interventions can be implemented at population, sub-population
-and individual levels to prevent 
-    suicide and suicide attempts. There are indications that
-for each adult who died by suicide there 
-    may have been more than 20 others attempting suicide."),
+and individual levels to prevent
+suicide and suicide attempts. There are indications that
+for each adult who died by suicide there
+        may have been more than 20 others attempting suicide."),
       h2("Worldwide suicide rates for men and women over the past 30 years"),
       p("The maps shows the suicide amount of countries from 1987 to 2016 which
 divided by gender. The color more
@@ -105,8 +107,8 @@ divided by gender. The color more
       plotOutput("map_plot"),
       h2("The suicide rate by different age groups"),
       p("The chart shows how the different age groups' suicide rate changed
-during 30 years. 
-    Suicide occurs throughout the lifespan and is the second leading cause
+during 30 years.
+Suicide occurs throughout the lifespan and is the second leading cause
     of death among 15-29 year olds globally."),
       ## age change trend during years
       selectInput("age",
@@ -125,16 +127,20 @@ during 30 years.
             reported for both men and women."),
         tags$li("The Eastern Mediterranean Region and Central Asia republics
             have the lowest suicide rates."),
-        tags$li("There are not major different about suicide number for each year.")
+        tags$li("There are not major different about suicide number
+                for each year.")
       ),
       h4("From age group."),
       tags$ul(
         tags$li("suicide rates have traditionally been highest amongst elderly
-males, rates among young people have been increasing 
-              a lot."),
-        tags$li("Males are four times more likely to die from suicide than are females."),
-        tags$li("Although suicide is a serious problem among the young and adults,
-            death rates continue to be highest among older adults ages 75 years and over.")
+males, rates among young people have been increasing
+                a lot."),
+        tags$li("Males are four times more likely to die from suicide than are
+                females."),
+        tags$li("Although suicide is a serious problem among the young and
+adults,
+            death rates continue to be highest among older adults ages 75 years
+                and over.")
       )
     ),
 
@@ -143,10 +149,12 @@ males, rates among young people have been increasing
       tabName = "HDI_and_GDP",
       h1("HDI and GDP"),
       h3("The correlation between GDP and Suicide rate"),
-      p("Suicides can be caused by many factors and in this section of the report,
-we will look into 
-        the relationship between suicide rate and GDP per capita of countries.
-The plots below display the suicide rate and GDP per capita of a country of your 
+      p("Suicides can be caused by many factors and
+in this section of the report,
+we will look into
+the relationship between suicide rate and GDP per capita of countries.
+The plots below display the suicide rate and GDP per capita of
+a country of your
         choice over the years between 1985 to 2016."),
       selectInput("country_name",
         label = "select a country", choices = suicide_data$country,
@@ -157,26 +165,30 @@ The plots below display the suicide rate and GDP per capita of a country of your
       plotOutput("gdpchart"),
       br(),
       p("If we observe the plots, the correlation between GDP per capita and
-suicide rates of countries all differ, 
-        they are either positive or negative, which further suggests that
+suicide rates of countries all differ,
+they are either positive or negative, which further suggests that
 economic status is
         not the only factor that contributes to suicide."),
       h3("The correlation between HDI and Suicide rate"),
-      p("According to United Nation's Development Programme, 
-        Human Development Index (HDI) is created to measure the
-development of countries, 
-        not based solely on their economic growth, 
-        but human development, which further 
-        contributes to questioning the government policy priorities of countries. 
-        HDI is calculated based on three criterias which are a long, 
+      p("According to United Nation's Development Programme,
+Human Development Index (HDI) is created to measure the
+development of countries,
+not based solely on their economic growth,
+but human development, which further
+contributes to questioning the government policy
+priorities of countries.
+HDI is calculated based on three criterias which are a long,
         healthy life, education level and standard of living."),
       p("The plot below shows the trend for HDI for each country
-between 1985 to 2016. 
-        If we carefully observe the plot, it occurs that the lighter the color of HDI,
-        the lesser the number of suicide. In other words, countries with higher HDI 
-        have lower rate of suicide, therefore, their governments prioritize
-not only their 
-        economic status, but also focus on their health care and education field."),
+between 1985 to 2016.
+If we carefully observe the plot, it occurs that the lighter
+the color of HDI,
+        the lesser the number of suicide. In other words, countries with
+higher HDI
+have lower rate of suicide, therefore, their governments prioritize
+not only their
+economic status, but also focus on their health care and education
+        field."),
       br(),
       plotlyOutput("hdi.chart"),
       br(),
@@ -184,12 +196,12 @@ not only their
       p("In conclusion, based on the analysis of the
 relationships between suicide rate and GDP per capita,
         suicide rate and HDI, economic status does
-not have a major impact on suicide rate. Therefore, as the relationship 
-        between HDI and suicide rate mostly shows
-a negative correlation among the countries, it wouldn't be wrong 
-        to conclude that it is important for any country
-to focus on improving and developing their health care and education system 
-        as much as how they focus on their economic growth,
+not have a major impact on suicide rate. Therefore, as the relationship
+between HDI and suicide rate mostly shows
+a negative correlation among the countries, it wouldn't be wrong
+to conclude that it is important for any country
+to focus on improving and developing their health care and education system
+as much as how they focus on their economic growth,
         to prevent suicide.")
     ),
 
@@ -202,15 +214,14 @@ to focus on improving and developing their health care and education system
           p(
             class = "yinan-head-body",
             "How have the relationship Between GDP and Suiside
-                     Number changed over time?", br(), "How have GDP of countries
-                     grew over time by continent?", br(), "What is the one question
-                     that you want to ask?", br(), "Explore the datasetand create Your 
-                     own Animated Graph!"
-          )
-        ),
+                     Number changed over time?", br(), "How have GDP of
+countries
+                     grew over time by continent?", br(), "What is the one
+question
+                     that you want to ask?", br(), "Explore the datasetand
+create Your own Animated Graph!")),
         box(h2("Animated Graph"),
-          p("This may take a minute to load 
-                     (Facet will take even longer)"),
+          p("This may take a minute to load (Facet will take even longer)"),
           solidHeader = TRUE,
           collapsible = TRUE,
           plotOutput("animated"),
@@ -258,17 +269,16 @@ to focus on improving and developing their health care and education system
               the relationship between several independent or
               predictor variables and a dependent or criterion variable.
               It would produce a multidimensional regression line(also known
-              as the line of best fit) base off of the input.              
-              We will use this model to predict the Suicide number of a country
-              based on the GDP, the age group, sex, year number, and many other
-              columns of interest. Compare to the more advanced model 
-              such as LSTM 
-              or Attention model for prediction, this model is chosen due 
-              to its simplicity and limitation of our dataset. 
-              We decided to use Multivariable Linear Regression other than
-              Multivariable Logistic regression because most of our data 
-              is continuous other than binary."
-      ),
+              as the line of best fit) base off of the input.
+We will use this model to predict the Suicide number of a country
+based on the GDP, the age group, sex, year number, and many other
+              columns of interest. Compare to the more advanced model
+such as LSTM or Attention model for prediction, this model is chosen due
+to its simplicity and limitation of our dataset.
+We decided to use Multivariable Linear Regression other than
+Multivariable Logistic regression because most of our data
+        is continuous other than binary."
+        ),
       br(),
       fluidRow(
         box(h2("Predicting Result"),
@@ -277,9 +287,8 @@ to focus on improving and developing their health care and education system
           title = "Predicting Result", status = "primary",
           valueBoxOutput("killed_box"),
           br(),
-          p(class = "comment", "Scroll around and try different 
-                    input to see how the prediction have changed")
-        ),
+          p(class = "comment", "Scroll around and try different
+            input to see how the prediction have changed")),
         box(
           title = "Selections", status = "warning",
           br(),
@@ -359,15 +368,13 @@ to focus on improving and developing their health care and education system
           tabPanel("Model Graph", img(src = "facet1.gif")),
           p("Some people think many Asian Countries are negligent
                   to mental health issues, so Asian counties will have more
-                  suiside happening. 
-                  Which is not the fact.
-                  ")
+                  suiside happening.
+Which is not the fact.")
         )
       )
     )
   )
 )
-
 
 ## ui code starts here
 ui <- fluidPage(
