@@ -60,4 +60,55 @@ server <- function(input, output) {
   #------------------------------
   #Yinan's Code End 
   #-----------------------------
+
+  #Badmaarag
+  output$hdi.chart <- renderPlotly({
+    plot_ly(suicide_data, x = ~country,  y = ~`suicides/100k pop`, type = 'scatter',
+            color = ~`HDI for year`, size = ~`suicides/100k pop`,
+            text = ~paste(year,
+                          "</br>", "HDI for year: ",`HDI for year`)) %>% 
+      layout(xaxis = list(title = "", tickangle = 45),
+             yaxis = list(title = "Suicides per 100k of population"),
+             title = "Comparison between HDI and Suicide worldwide")
+  })
+  
+  filtered <- reactive({
+    suicide_data %>% 
+      filter(country == input$country_name) %>%  
+      group_by(country, year) %>% 
+      summarize(
+        sum(suicides_no)
+      ) 
+  })
+  
+  output$linechart <- renderPlot ({
+    ggplot(data = filtered(), mapping = aes_string(
+      x = filtered()$year,
+      y = filtered()$`sum(suicides_no)`
+    ), shape = cyl) +
+      geom_point(colour = 'blue', shape = 18, size = 2) +
+      stat_smooth(method = "lm", col = "yellow") +
+      ggtitle("Change in the number suicide people over years in the chosen country") +
+      xlab("year") +
+      ylab("Number of suicide people")
+  })
+  
+  p <- reactive({
+    suicide_data %>% 
+      filter(country == input$country_name) %>% 
+      group_by(year, `gdp_per_capita ($)`) %>% 
+      summarize(mean(`gdp_per_capita ($)`)) %>% 
+      select(year, `gdp_per_capita ($)`)
+  })
+  
+  output$gdpchart <- renderPlot({
+    ggplot(data = p(), mapping = aes_string(
+      x = p()$year, y = p()$`gdp_per_capita ($)`)
+    ) +
+      geom_point(colour = 'blue', shape = 23, size = 2) +
+      geom_smooth(method = "lm", colour = 'red') +
+      ggtitle("Change in GDP per capita over years in the chosen country") +
+      xlab("year") +
+      ylab("GDP per capita")
+  })
 }
