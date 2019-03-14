@@ -16,8 +16,6 @@ library("png")
 # Question: based on the information form past x years, can you predict
 # the suicide number in next y years?
 suicide_data <- read_csv("data/master.csv")
-#suicide <- read.csv("data/master.csv", stringsAsFactors = FALSE)
-
 
 # predict the number of suiside that may happen with diferent input
 # input gdp, population,gdp per capita

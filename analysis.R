@@ -7,6 +7,7 @@ library("lintr")
 library("ggiraph")
 library("colormap")
 library("lintr")
+library("maps")
 
 # Read in dataset from local desktop
 suicide <- read.csv("data/master.csv", stringsAsFactors = FALSE)
@@ -26,7 +27,7 @@ overview_analysis <- suicide %>%
 
 overview_analysis$country <- factor(
   overview_analysis$country,
-  levels = as.character(overview_analysis$country)
+  levels = overview_analysis$country
 )
 
 overview <- plot_ly(overview_analysis,
@@ -40,24 +41,6 @@ overview <- plot_ly(overview_analysis,
     yaxis = list(title = "Number of Suicide People")
   )
 
-# Read in dataset from local desktop
-suicide <- read.csv("data/master.csv", stringsAsFactors = FALSE)
-
-# Graph of total suicide people country for introduction
-overview_analysis <- suicide %>%
-  group_by(country) %>%
-  summarize(
-    sum(suicides_no)
-  )
-overview <- plot_ly(overview_analysis,
-                    x = ~country, y = ~`sum(suicides_no)`, type = "bar",
-                    marker = list(color = "pink")
-) %>%
-  layout(
-    title = "The total number of people who commit suicide from 1985 to 2016
-    worldwide",
-    xaxis = list(title = "Country"), yaxis = list(title = "Number of People")
-  )
 
 ###### bar chart########
 
@@ -142,4 +125,3 @@ map_datata <- function(input_sex, input_year) {
     )
   g
 }
-

@@ -2,6 +2,7 @@ library("shiny")
 library("shinydashboard")
 library("plotly")
 library("lintr")
+source("yinan.R")
 
 sidebar <- dashboardSidebar(
   sidebarMenu(
@@ -33,19 +34,19 @@ body <- dashboardBody(
       p("The action of sucide typically involves strong
         emotional repercussions not
         only affecting victims themsevles but also affecting surrounding people.
-        It is reported that approximately one million people die
+        It is reported that approximately", strong("one million"), "people die
         from suicide by
 The World Health Organisation(WHO) and it is considered as one of the three
       leading causes of death worldwide. The cause for suicide varies including
         but is not limited to age, sex, GDP and HDI etc.
-      , and certain groups tend to commit suicide more frequent than others."),
-      h2("Insight of suicide worldwide"),
+      , and it is observed that certain groups tend to commit suicide more
+        frequent than others."),
+      h2("Insights of suicide"),
       p(
         "In every country, the number of people who commit suicides are
-        substantial. The bar graph below gives a", strong("general overivew"),
-        "on the
-        total number of people died from suicide from 1985 to 2016 in each
-        country where the data could be collected."
+        significant. The bar graph below gives a glimpse to the top 10 countries
+that have the most number of people died from suicide from 1985 to 2016
+        where the data could be collected."
       ),
       plotlyOutput("bargraph"),
       br(),
@@ -53,12 +54,17 @@ The World Health Organisation(WHO) and it is considered as one of the three
       p("The ultimate purpose of analyzing this dataset is to prevent
         future suicide by finding out the cause to suicide based on the
         dataset we used. Alternatively, we also provide a prediction on
-        the suicide rate with respect to given conditions."),
+        the suicide rate with respect to given conditions. As a matter of fact,
+        it should be a resource for people who care about social issues and are
+        interested in studying the psychology behind suicide. We are hoping that
+        our studies on this dataset could possibly give them some inspiration
+        and some insights into suicide"),
       h2("Analysis Overview"),
       h4("Data Overview"),
       tags$ul(
-        tags$li("Age and Sex"),
-        tags$li("GDP and HDI"),
+        tags$li("The impact of suicide on people of different age and gender
+                groups"),
+        tags$li("Correlation between GDP and HDI and suicide rates"),
         tags$li("Prediction on Suicide")
       ),
       h3("Who Are We?"),
@@ -74,12 +80,10 @@ The World Health Organisation(WHO) and it is considered as one of the three
         "Source of data: Click here!"
       )
     ),
-    # Rita
-    # Rita
     tabItem(
       tabName = "Age",
       h2("The big numbers about suicide"),
-      p("Close to 800 000 people die due to suicide every year, which is
+      p("Close to 800,000 people die due to suicide every year, which is
 one person every 40 seconds.
 Suicide is a global phenomenon and occurs throughout the lifespan.
 Effective and evidence-based
@@ -92,8 +96,6 @@ for each adult who died by suicide there
       p("The maps shows the suicide amount of countries from 1987 to 2016 which
 divided by gender. The color more
     darker means more people chose suicide during that year."),
-      br(),
-      p("(Some of countries's suicide amount undefined.)"),
       selectInput("sex",
         label = "Sex",
         choices = list("female", "male"),
@@ -105,6 +107,7 @@ divided by gender. The color more
         selected = "1987"
       ),
       plotOutput("map_plot"),
+      p("(Some countries have undefined data)"),
       h2("The suicide rate by different age groups"),
       p("The chart shows how the different age groups' suicide rate changed
 during 30 years.

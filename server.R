@@ -6,9 +6,10 @@ library(reshape2)
 library(lintr)
 source("analysis.R")
 source("yinan.R")
+
 server <- function(input, output) {
   output$bargraph <- renderPlotly({
-  overview
+    overview
   })
 
   output$bar_plot <- renderPlot({
@@ -66,7 +67,7 @@ server <- function(input, output) {
   #Badmaarag
   output$hdi.chart <- renderPlotly({
     plot_ly(suicide_data, x = ~country,  y = ~`suicides/100k pop`,
-            type = "scatter",
+            type = "scatter", mode = "markers",
             color = ~`HDI for year`, size = ~`suicides/100k pop`,
             text = ~paste(year,
                           "</br>", "HDI for year: ", `HDI for year`)) %>%
