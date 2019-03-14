@@ -1,16 +1,20 @@
 library("shiny")
 library("shinydashboard")
 library("plotly")
+library("lintr")
 
+lintr::lint("ui.R")
 sidebar <- dashboardSidebar(
   sidebarMenu(
     menuItem(
-      "Introduction", tabName = "Introduction", icon = icon("dashboard")
-             ),
+      "Introduction",
+      tabName = "Introduction", icon = icon("dashboard")
+    ),
     menuItem("Age and Area", tabName = "Age", icon = icon("globe-asia")),
     menuItem(
-      "HDI and GDP", tabName = "HDI_and_GDP", icon = icon("dollar-sign")
-             ),
+      "HDI and GDP",
+      tabName = "HDI_and_GDP", icon = icon("dollar-sign")
+    ),
     menuItem("Animation and Prediction",
       icon = icon("chart-line"),
       tabName = "yinan"
@@ -27,17 +31,22 @@ body <- dashboardBody(
     tabItem(
       tabName = "Introduction",
       h2("Facts of Suicide"),
-      p("The action of sucide typically involves strong emotional repercussionsnot
+      p("The action of sucide typically involves strong
+        emotional repercussions not
         only affecting victims themsevles but also affecting surrounding people.
-        It is reported that approximately one million people die from suicide by 
-        The World Health Organisation(WHO) and it is considered as one of the three
+        It is reported that approximately one million people die
+        from suicide by
+The World Health Organisation(WHO) and it is considered as one of the three
         leading causes of death worldwide. The cause for suicide varies including 
         xxx, and certain groups tend to commit suicide more frequent than others."),
       h2("Insight of suicide worldwide"),
-      p("In every country, the number of people who commit suicides are
-        substantial. The bar graph below gives a", strong("general overivew"), "on the
+      p(
+        "In every country, the number of people who commit suicides are
+        substantial. The bar graph below gives a", strong("general overivew"),
+        "on the
         total number of people died from suicide from 1985 to 2016 in each
-        country where the data could be collected."),
+        country where the data could be collected."
+      ),
       plotlyOutput("bargraph"),
       br(),
       h2("What is our purpose?"),
@@ -53,79 +62,91 @@ body <- dashboardBody(
         tags$li("Third list item")
       ),
       h3("Who Are We?"),
-      p("This project was made by",
-strong(class = "name", "Yinan Guo, Song Xue, Rita Wu,
+      p(
+        "This project was made by",
+        strong(class = "name", "Yinan Guo, Song Xue, Rita Wu,
                                            Badmaarag Batjargal"),
-"as the final project for the course Info 201."),
+        "as the final project for the course Info 201."
+      ),
       tags$a(
         href = "https://www.kaggle.com/russellyates88/suicide-rates-overview-1985-to-2016",
         "Source of data: Click here!"
       )
     ),
     # Rita
-# Rita
-tabItem(
-  tabName = "Age",
-  h2("The big numbers about suicide"),
-  p("Close to 800 000 people die due to suicide every year, which is one person every 40 seconds. 
-    Suicide is a global phenomenon and occurs throughout the lifespan. Effective and evidence-based 
-    interventions can be implemented at population, sub-population and individual levels to prevent 
-    suicide and suicide attempts. There are indications that for each adult who died by suicide there 
+    # Rita
+    tabItem(
+      tabName = "Age",
+      h2("The big numbers about suicide"),
+      p("Close to 800 000 people die due to suicide every year, which is
+one person every 40 seconds.
+Suicide is a global phenomenon and occurs throughout the lifespan. Effective and evidence-based
+    interventions can be implemented at population, sub-population
+and individual levels to prevent 
+    suicide and suicide attempts. There are indications that
+for each adult who died by suicide there 
     may have been more than 20 others attempting suicide."),
-  h2("Worldwide suicide rates for men and women over the past 30 years"),
-  p("The maps shows the suicide amount of countries from 1987 to 2016 which divided by gender. The color more
+      h2("Worldwide suicide rates for men and women over the past 30 years"),
+      p("The maps shows the suicide amount of countries from 1987 to 2016 which
+divided by gender. The color more
     darker means more people chose suicide during that year."),
-  br(),
-  p("(Some of countries's suicide amount undefined.)"),
-  selectInput("sex",
-              label = "Sex",
-              choices = list("female", "male"),
-              selected = "female"
-  ),
-  selectInput("year",
-              label = "Year",
-              choices = c(1987:2016),
-              selected = "1987"
-  ),
-  plotOutput("mapPlot"),
-  
-  
-  h2("The suicide rate by different age groups"),
-  p("The chart shows how the different age groups' suicide rate changed during 30 years. 
-    Suicide occurs throughout the lifespan and is the second leading cause of death among 15-29 year olds globally."),
-  ## age change trend during years
-  selectInput("age",
-              label = "Age Group",
-              choices = list(
-                "5-14 years", "15-24 years", "25-34 years",
-                "35-54 years", "55-74 years", "75+ years"
-              ),
-              selected = "5-14 years"
-  ),
-  plotOutput("barPlot"),
-  
-  h2("The information we know"),
-  h4("From geographic position"),
-  tags$ul(
-    tags$li("In Europe, USA, Russia are the highest suicide rates are reported for both men and women."),
-    tags$li("The Eastern Mediterranean Region and Central Asia republics have the lowest suicide rates."),
-    tags$li("There are not major different about suicide number for each year.")),
-  h4("From age group."),
-  tags$ul(
-    tags$li("suicide rates have traditionally been highest amongst elderly males, rates among young people have been increasing 
+      br(),
+      p("(Some of countries's suicide amount undefined.)"),
+      selectInput("sex",
+        label = "Sex",
+        choices = list("female", "male"),
+        selected = "female"
+      ),
+      selectInput("year",
+        label = "Year",
+        choices = c(1987:2016),
+        selected = "1987"
+      ),
+      plotOutput("map_plot"),
+      h2("The suicide rate by different age groups"),
+      p("The chart shows how the different age groups' suicide rate changed
+during 30 years. 
+    Suicide occurs throughout the lifespan and is the second leading cause
+    of death among 15-29 year olds globally."),
+      ## age change trend during years
+      selectInput("age",
+        label = "Age Group",
+        choices = list(
+          "5-14 years", "15-24 years", "25-34 years",
+          "35-54 years", "55-74 years", "75+ years"
+        ),
+        selected = "5-14 years"
+      ),
+      plotOutput("bar_plot"),
+      h2("The information we know"),
+      h4("From geographic position"),
+      tags$ul(
+        tags$li("In Europe, USA, Russia are the highest suicide rates are
+            reported for both men and women."),
+        tags$li("The Eastern Mediterranean Region and Central Asia republics
+            have the lowest suicide rates."),
+        tags$li("There are not major different about suicide number for each year.")
+      ),
+      h4("From age group."),
+      tags$ul(
+        tags$li("suicide rates have traditionally been highest amongst elderly
+males, rates among young people have been increasing 
               a lot."),
-    tags$li("Males are four times more likely to die from suicide than are females."),
-    tags$li("Although suicide is a serious problem among the young and adults, death rates continue to be highest among older adults ages 75 years and over."))
-  ),
+        tags$li("Males are four times more likely to die from suicide than are females."),
+        tags$li("Although suicide is a serious problem among the young and adults,
+            death rates continue to be highest among older adults ages 75 years and over.")
+      )
+    ),
 
     # Badmaarag
     tabItem(
       tabName = "HDI_and_GDP",
       h1("HDI and GDP"),
       h3("The correlation between GDP and Suicide rate"),
-      p("Suicides can be caused by many factors and in this section of the report, we will look into 
+      p("Suicides can be caused by many factors and in this section of the report,
+we will look into 
         the relationship between suicide rate and GDP per capita of countries.
-        The plots below display the suicide rate and GDP per capita of a country of your 
+The plots below display the suicide rate and GDP per capita of a country of your 
         choice over the years between 1985 to 2016."),
       selectInput("country_name",
         label = "select a country", choices = suicide_data$country,
@@ -135,31 +156,41 @@ tabItem(
       br(),
       plotOutput("gdpchart"),
       br(),
-      p("If we observe the plots, the correlation between GDP per capita and suicide rates of countries all differ, 
-        they are either positive or negative, which further suggests that economic status is 
+      p("If we observe the plots, the correlation between GDP per capita and
+suicide rates of countries all differ, 
+        they are either positive or negative, which further suggests that
+economic status is
         not the only factor that contributes to suicide."),
       h3("The correlation between HDI and Suicide rate"),
       p("According to United Nation's Development Programme, 
-        Human Development Index (HDI) is created to measure the development of countries, 
+        Human Development Index (HDI) is created to measure the
+development of countries, 
         not based solely on their economic growth, 
         but human development, which further 
         contributes to questioning the government policy priorities of countries. 
         HDI is calculated based on three criterias which are a long, 
         healthy life, education level and standard of living."),
-      p("The plot below shows the trend for HDI for each country between 1985 to 2016. 
+      p("The plot below shows the trend for HDI for each country
+between 1985 to 2016. 
         If we carefully observe the plot, it occurs that the lighter the color of HDI,
         the lesser the number of suicide. In other words, countries with higher HDI 
-        have lower rate of suicide, therefore, their governments prioritize not only their 
+        have lower rate of suicide, therefore, their governments prioritize
+not only their 
         economic status, but also focus on their health care and education field."),
       br(),
       plotlyOutput("hdi.chart"),
       br(),
       h3("Conclusion"),
-      p("In conclusion, based on the analysis of the relationships between suicide rate and GDP per capita,
-        suicide rate and HDI, economic status does not have a major impact on suicide rate. Therefore, as the relationship 
-        between HDI and suicide rate mostly shows a negative correlation among the countries, it wouldn't be wrong 
-        to conclude that it is important for any country to focus on improving and developing their health care and education system 
-        as much as how they focus on their economic growth, to prevent suicide.")
+      p("In conclusion, based on the analysis of the
+relationships between suicide rate and GDP per capita,
+        suicide rate and HDI, economic status does
+not have a major impact on suicide rate. Therefore, as the relationship 
+        between HDI and suicide rate mostly shows
+a negative correlation among the countries, it wouldn't be wrong 
+        to conclude that it is important for any country
+to focus on improving and developing their health care and education system 
+        as much as how they focus on their economic growth,
+        to prevent suicide.")
     ),
 
     # Yinan
@@ -244,7 +275,7 @@ tabItem(
           solidHeader = TRUE,
           collapsible = TRUE,
           title = "Predicting Result", status = "primary",
-          valueBoxOutput("progressBox"),
+          valueBoxOutput("killed_box"),
           br(),
           p(class = "comment", "Scroll around and try different 
                     input to see how the prediction have changed")
@@ -297,7 +328,7 @@ tabItem(
             "Model Stats",
             h4("Just to show this model is
                             Statistically Significant"),
-            verbatimTextOutput(outputId = "modelSummary")
+            verbatimTextOutput(outputId = "model_summary")
           ),
           tabPanel("Model Graph", img(src = "residual_plot.png"))
         )

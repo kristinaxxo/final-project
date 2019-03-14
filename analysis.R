@@ -4,7 +4,6 @@ library("shiny")
 library("ggplot2")
 library("styler")
 library("lintr")
-library("rsconnect")
 library("ggiraph")
 library("colormap")
 library("lintr")
@@ -63,21 +62,19 @@ overview <- plot_ly(overview_analysis,
 ###### bar chart########
 
 # get general data for the bar chart about age group
-generalAge <- suicide[c(2, 3, 4, 5)]
+general_age <- suicide[c(2, 3, 4, 5)]
 
 # get the function that choose age for the bar chart
-ageFunction <- function(inputAge) {
-  ageGroup <- generalAge[generalAge$age == inputAge, ]
-  
+age_function <- function(input_age) {
+  age_group <- general_age[general_age$age == input_age, ]
   # get the suicide number of that age group for 30 years
-  ageSum <- ageGroup %>%
+  age_sum <- age_group %>%
     group_by(year, sex) %>%
     summarise(
       suicides_no = sum(suicides_no)
     )
-  
   # create the bar chart by age and have both sex
-  age <- ggplot(data = ageSum) +
+  age <- ggplot(data = age_sum) +
     aes(x = year, y = `suicides_no`, fill = factor(sex)) +
     geom_bar(stat = "identity", position = "dodge") +
     xlab("Year") + ylab("Suicide total number")
@@ -94,50 +91,45 @@ general <- suicide[c(1, 2, 3, 5)]
 map_world <- map_data("world")
 
 # the function for filter the sex
-mapData <- function(inputSex, inputYear) {
-  sexData <- function(inputSex) {
-    s <- general %>% filter(sex == inputSex)
+map_datata <- function(input_sex, input_year) {
+  sex_data <- function(input_sex) {
+     general %>% filter(sex == input_sex)
   }
-  
-  sInput <- sexData(inputSex)
-  
+  s_input <- sex_data(input_sex)
   # the function for choose year
-  yearData <- function(inputYear) {
-    yearNum <- sInput %>%
-      group_by(country, year = inputYear) %>%
+  year_data <- function(input_year) {
+    year_num <- s_input %>%
+      group_by(country, year = input_year) %>%
       summarise(
-        suicideSum = sum(suicides_no)
+        suicide_sum = sum(suicides_no)
       )
   }
-  mapDf <- yearData(inputYear)
-  
+  map_df <- year_data(input_year)
   # find the different name and correct it
-  mapsNames <- unique(unname(unlist(map_data("world")["region"])))
-  dataNames <- mapDf$country
-  setdiff(x = dataNames, y = mapsNames)
-  mapDf$country <- recode(mapDf$country,'United States' = 'USA', 'United Kingdom' = 'UK', "Republic of Korea" = "South Korea",
-                          "Russian Federation" = "Russia", "Antigua and Barbuda" = "Antigua", "Antigua and Barbuda" = "Antigua",
-                          "Cabo Verde" = "Cape Verde", "Macau" = "China", "Saint Vincent and Grenadines" = "Saint Vincent",
-                          "Saint Vincent and Grenadines" = "Saint Vincent"
+  maps_names <- unique(unname(unlist(map_data("world")["region"])))
+  data_names <- map_df$country
+  setdiff(x = data_names, y = maps_names)
+  map_df$country <- recode(map_df$country,
+                          "United States" = "USA",
+                          "United Kingdom" = "UK",
+                          "Republic of Korea" = "South Korea",
+                          "Russian Federation" = "Russia",
+                          "Antigua and Barbuda" = "Antigua",
+                          "Cabo Verde" = "Cape Verde",
+                          "Macau" = "China",
+                          "Saint Vincent and Grenadines" = "Saint Vincent",
+                          "Trinidad and Tobago" = "Trinidad",
+                          "Saint Kitts and Nevis" = "Saint Kitts"
   )
-  
-  # combine the chart
-  map_world_join <- left_join(map_world, mapDf, by = c("region" = "country"))
-  # View(map.world)
-  # View(map.world_join)
-  map_world_join <- map_world_join %>% mutate(fill_flg = ifelse(is.na(suicideSum), F, T))
-  # View(map.world_join)
-  #df_country_points <- data.frame(country = mapDf$country, stringsAsFactors = F)
-  # glimpse(df.country_points)
-  
-  # create the map
-  # interactive
+  map_world_join <- left_join(map_world, map_df, by = c("region" = "country"))
+  map_world_join <- map_world_join %>%
+    mutate(fill_flg = ifelse(is.na(suicide_sum), F, T))
   g <- ggplot(map_world_join) +
     geom_polygon_interactive(
       color = "GRAY",
       aes(long, lat,
-          group = group, fill = suicideSum,
-          tooltip = paste(region, "<br/>", suicideSum)
+          group = group, fill = suicide_sum,
+          tooltip = paste(region, "<br/>", suicide_sum)
       )
     ) +
     hrbrthemes::theme_ipsum() +
@@ -145,8 +137,8 @@ mapData <- function(inputSex, inputYear) {
       colormap = colormap::colormaps$copper, reverse = T
     ) +
     labs(
-      title = "The Suicide Number Around World", 
+      title = "The Suicide Number Around World",
       caption = "number of people"
     )
   g
-}  
+}
