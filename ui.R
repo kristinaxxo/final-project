@@ -1,18 +1,20 @@
 library("shiny")
 library("shinydashboard")
+library("plotly")
+
 
 sidebar <- dashboardSidebar(
   sidebarMenu(
     menuItem("Introduction", tabName = "Introduction", icon = icon("dashboard")),
     menuItem("Widgets",
-      icon = icon("th"), tabName = "widgets",
-      badgeLabel = "new", badgeColor = "green"
-    ),
+      icon = icon("th"), tabName = "widgets"),
+    menuItem("Animation and Prediction", icon = icon("chart-line"),
+             tabName = "yinan"),
+    menuItem("Age", tabName = "Age", icon = icon("th")),
     menuItem("Original Codes",
-      icon = icon("file-code-o"),
-      href = "https://github.com/rstudio/shinydashboard/"
-    ),
-    menuItem("Age", tabName = "Age", icon = icon("th"))
+         icon = icon("file-code-o"),
+         href = "https://github.com/rstudio/shinydashboard/"
+)
   )
 )
 
@@ -110,6 +112,164 @@ body <- dashboardBody(
         selected = "5-14 years"
       ),
      plotOutput("barPlot")
+    ),
+    
+    tabItem(tabName = "yinan",
+            fluidRow(
+              div(class = "yinan-head", h1("Create Your Own Graph"),
+                  h4(class = "yinan-head-body",
+                     "How have the relationship Between GDP and Suiside
+                     Number changed over time?", br(),"How have GDP of countries
+                     grew over time by continent?", br(), "What is the one question
+                     that you want to ask?", br(), "Explore the datasetand create Your 
+                     own Animated Graph!")
+                  ),
+              box( h2("Animated Graph"),
+                   p("This may take a minute to load 
+                     (Facet will take even longer)"),
+                   
+                   solidHeader = TRUE,
+                   collapsible = TRUE,
+                   plotOutput("animated"),
+                   p(class="comment2","Each dot here represents a county,
+                     and its radius is its population."),
+                   title = "", status = "primary"),
+              
+              box(
+                h2("Inputs"),status = "warning",
+                br(),
+                #`suicides_no`,"gdp_per_capita ($)"
+                
+                selectInput("x_axis_animated",
+                            label = h3("Chose a column for X"),
+                            choices = list(
+                              "GDP Per Capita" = "gdp_per_capita ($)",
+                              "GDP For Year" = "gdp_for_year ($)",
+                              "Suicide Number" = "suicides_no",
+                              "Suicide Every 100k Peop" = "suicides/100k pop",
+                              "Population" = "population"
+                            ),
+                            selected = "gdp_per_capita ($)"
+                ),
+                selectInput("y_axis_animated",
+                            label = h3("Chose a column for Y"),
+                            choices = list(
+                              "GDP Per Capita" = "gdp_per_capita ($)",
+                              "GDP For Year" = "gdp_for_year ($)",
+                              "Suicide Number" = "suicides_no",
+                              "Suicide Every 100k Peop" = "suicides/100k pop",
+                              "Population" = "population"
+                            ),
+                            selected = "suicides_no"
+                ),
+                checkboxInput("facet", "Facet by Continent", value = FALSE)
+              )
+                   ),
+            h1("Predicting with Multivariable Regression Analysis"),
+            h2("What is Multivariable Regression Analysis"),
+            p(class = "explain",
+              "Multivariable Regression Analysis is the study of
+              the relationship between several independent or
+              predictor variables and a dependent or criterion variable.
+              It would produce a multidimensional regression line(also known
+              as the line of best fit) base off of the input.              
+              We will use this model to predict the Suicide number of a country
+              based on the GDP, the age group, sex, year number, and many other
+              columns of interest. Compare to the more advanced model 
+              such as LSTM 
+              or Attention model for prediction, this model is chosen due 
+              to its simplicity and limitation of our dataset. 
+              We decided to use Multivariable Linear Regression other than
+              Multivariable Logistic regression because most of our data 
+              is continuous other than binary."),
+            br(),
+            fluidRow(
+              box(h2("Predicting Result"),
+                  solidHeader = TRUE,
+                  collapsible = TRUE,
+                  title = "Predicting Result", status = "primary",
+                  valueBoxOutput("progressBox"),
+                  br(),
+                  p(class = "comment", "Scroll around and try different 
+                    input to see how the prediction have changed")
+                  ),
+              box(title = "Selections", status = "warning",
+                  br(),
+                  textInput("gdp_per_capita", "GDP Per Capita", 
+                            value = "8142"),
+                  textInput("gdp_for_year", "Yearly GDP", 
+                            value = "1.913830e+10"),
+                  p(class = "comment2", "Highest GDP Per Capita so
+                    far is 93053$"),
+                  sliderInput("input_year", "Year:", 1985, 2100, 2019),
+                  textInput("input_population", "Population",
+                            value = "266700"),
+                  selectInput("select_sex",
+                              label = h3("Sex"),
+                              choices = list(
+                                "male" = "male",
+                                "female" = "female"
+                              ),
+                              selected = "male"
+                  ),
+                  
+                  selectInput("select_age",
+                              label = h3("select a age group"),
+                              choices = list(
+                                "5-14 years" = "5-14 years",
+                                "15-24 years" = "15-24 years",
+                                "25-34 years" = "25-34 years",
+                                "35-54 years" = "35-54 years",
+                                "55-74 years" = "55-74 years",
+                                "75+ years" = "75+ years"
+                              ),
+                              selected = "25-34 years"
+                  )
+              )
+              ),
+            br(),
+            h1("More Information For These Graphs"),
+            fluidRow(
+              tabBox(
+                id = "tabset1",
+                title = "Model Summary",
+                tabPanel("Model Stats", 
+                         h4("Just to show this model is
+                            Statistically Significant"),
+                         verbatimTextOutput(outputId = "modelSummary")),
+                tabPanel("Model Graph", img(src = "residual_plot.png"))
+                )),
+            h2("Myth Buster"),
+            fluidRow(
+              box(
+                solidHeader = TRUE,
+                collapsible = TRUE,
+                h3("1. Being Poor/Rich caused suiside?"),
+                br(),
+                h4("Short answer? NO!"),
+                tabPanel("Model Graph", img(src = "outfile.gif")),
+                p("
+                  According to our graph, most countriess moved horizontally in
+                  the graph, showing only signs of increase in GDP, but
+                  no sign in increase of Suicide Number. Inadditional,
+                  there are some countries that shows a lower/higher
+                  suicide number based on their GDP, so we may
+                  conclude that GDP do not cause suicide")
+                ),
+              box(
+                solidHeader = TRUE,
+                collapsible = TRUE,
+                h3("2. Asian have a higher Suicide Number?"),
+                br(),
+                h4("NO!"),
+                tabPanel("Model Graph", img(src = "facet1.gif")),
+                p("Some people think many Asian Countries are negligent
+                  to mental health issues, so Asian counties will have more
+                  suiside happening. 
+                  Which is not the fact.
+                  ")
+                )
+            )
     )
   )
 )

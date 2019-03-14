@@ -1,12 +1,8 @@
-#dir.create("~/Downloads/jena_climate", recursive = TRUE)
-#download.file(
-#  "https://s3.amazonaws.com/keras-datasets/jena_climate_2009_2016.csv.zip",
-#  "~/Downloads/jena_climate/jena_climate_2009_2016.csv.zip"
-#)
-#unzip(
-#  "~/Downloads/jena_climate/jena_climate_2009_2016.csv.zip",
-#  exdir = "~/Downloads/jena_climate"
-#)
+# Yinan Guo 
+# Info 201 
+# This is my code for final project. Hope you don't lost by my comments
+# I comment out some codes for normalization, dataset seperation, and 
+# different model since they are not used in this project.
 
 library(ggplot2)
 library(tibble)
@@ -15,12 +11,10 @@ library(dplyr)
 library(gganimate)
 library(countrycode)
 
-
-country_name = "United States"
-
-suicide_data <- read_csv("data/master.csv")
-#question, based on the information form past x years, can you predict
+#Question: based on the information form past x years, can you predict
 #the suicide number in next y years? 
+suicide_data <- read_csv("data/master.csv")
+
 
 #predict the number of suiside that may happen with diferent input
 #input gdp, population,gdp per capita
@@ -64,25 +58,22 @@ country_data <- function (df,country_name){
 #  normalize(country_year_group$`gdp_per_capita ($)`)
 #country_year_group$population <-
 #  normalize(country_year_group$population)
-#country_year_group <- country_year_group[!is.na(country_year_group$`suicides/100k pop`),]
+#country_year_group <- country_year_group[!is.na(
+#country_year_group$`suicides/100k pop`),]
 #
 
 
-#country_data_table <- country_data(country_year_group,country_name)
-#input_data <-country_year_group %>% 
- # select(country,year,suicides_no,population,`suicides/100k pop`,`gdp_for_year ($)`,`gdp_per_capita ($)`)
-#ggplot(data = country_data_table, aes(x= year, y = `suicides/100k pop`))+geom_line()
+# Some unused ML code From Here
 
-##ML From Here
-get_class_1 <- function (num, seq){
-  a<- 0
-  for (i in 1:length(seq)){
-    if (seq[i] <= num & num < seq[i+1]) {
-      a <- i
-    }
-  }
-  a
-}
+# get_class_1 <- function (num, seq){
+#   a<- 0
+#   for (i in 1:length(seq)){
+#     if (seq[i] <= num & num < seq[i+1]) {
+#       a <- i
+#     }
+#   }
+#   a
+# }
 #seq1 <- seq(from = 0.00, to = 1.05, by = 0.05)
 
 
@@ -90,15 +81,18 @@ get_class_1 <- function (num, seq){
 #  seq1 <- seq(from = 0.00, to = 1, by = 0.05)
 #  df$suicide_class <- sapply(df$`suicides/100k pop`, get_class_1, seq = seq1)
 #}
-
-
 #add_class_col(input_data)
 #a <- sapply(input_data$`suicides/100k pop`,get_class_1,seq = seq1)
 #input_data$suicide_class <- a
 #hist(input_data$suicide_class)
-#input <- select(data = input_data, year, population, suicides_no,`gdp_for_year ($)`,`gdp_per_capita ($)`)
+#input <- select(data = input_data, year, population, suicides_no,`
+#gdp_for_year ($)`,`gdp_per_capita ($)`)
 
 #df2 <- country_year_group[sample(nrow(country_year_group)),]
+
+
+#Seperate Training and testing Data set
+
 df2 <- suicide_data
 #seperate training and testing set
 p=0.8
@@ -109,6 +103,8 @@ training <- head(df2, index)
 # use the remaining 80% of data to training and testing the models
 testing <- tail(df2, nrow(df2)-index)
 
+
+#Different models
 # model1<-lm(data=training,formula =suicides_no~  population +`gdp_per_capita ($)`
 # )
 # 
@@ -117,12 +113,15 @@ testing <- tail(df2, nrow(df2)-index)
 
 model2 <- lm(data= suicide_data, formula = suicides_no~  `gdp_per_capita ($)`+
                `gdp_for_year ($)` + age + sex + year + population)
+
+
 # distPred <- predict(model2, testing)  # predict number
 # actuals_preds <- data.frame(cbind(actuals=testing$suicides_no,
 #                                   predicteds=distPred))  
 # correlation_accuracy <- cor(actuals_preds)  # 80.2%
 # head(actuals_preds)
-# min_max_accuracy <- mean(apply(actuals_preds, 1, min) / apply(actuals_preds, 1, max))  
+# min_max_accuracy <- mean(apply(actuals_preds, 1, min) /
+#apply(actuals_preds, 1, max))  
 
 # MAPE Calculation
 # mape <- mean(abs((actuals_preds$predicteds - actuals_preds$actuals))
@@ -150,34 +149,7 @@ convert_input <- function (gdp_per_capita, gdp_for_year, input_age, input_sex,
 
 
 
-####------------------------------ Plot animated graph
-p <- ggplot(
-  country_year_group, 
-  aes(x = x1, y=`suicides_no`, size = population, colour = country)) +
-  geom_point(show.legend = FALSE, alpha = 0.7) +
-  scale_color_viridis_d() +
-  scale_size(range = c(2, 12)) +
-  scale_x_log10() +
-  labs(x = "GDP per capita", y = "Suicide Number")+
-  facet_wrap(~continent) +
-  transition_time(year) +
-  labs(title = "Year: {frame_time}") +
-  shadow_wake(wake_length = 0.1, alpha = FALSE)
-
-p_nofacet <- ggplot(
-  country_year_group, 
-  aes(x = `gdp_for_year ($)`, y=`suicides_no`, size = population, colour = country)) +
-  geom_point(show.legend = FALSE, alpha = 0.7) +
-  scale_color_viridis_d() +
-  scale_size(range = c(2, 12)) +
-  scale_x_log10() +
-  labs(x = "GDP per capita", y = "Suicide Number")+
-  transition_time(year) +
-  labs(title = "Year: {frame_time}") +
-  facet_wrap(~continent) +
-  shadow_wake(wake_length = 0.1, alpha = FALSE)
-
-
+####Plot animated graph
 
 
 
