@@ -1,0 +1,43 @@
+.main-header .logo {
+  font-family: "Georgia", Times, "Times New Roman", serif;
+  font-weight: bold;
+  font-size: 24px;
+}
+/*
+.skin-blue .main-header .logo:hover {
+  background-color: orange;
+}*/
+
+/* sidebar menuitems when mouse hover */
+.skin-blue .main-sidebar .sidebar .sidebar-menu a:hover {
+                    background-color: brown;
+                    color:white;
+                    }
+.yinan-head {
+  font-family: "Georgia", Times, "Times New Roman", serif;
+  text-align: center;
+}
+
+.yinan-head-body {
+    text-align: left;
+    margin: 20px 0 30px 30px;
+}
+
+.comment {
+  font: italic 12px Georgia, serif;
+  margin-top: 130px;
+}
+
+.comment2 {
+  font: italic 12px Georgia, serif;
+}
+
+.explain {
+  margin-left: 50px;
+  font-size: 16px;
+}
+
+.tabset1 {
+  width: 100%;
+  
+}
