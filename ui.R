@@ -20,7 +20,7 @@ sidebar <- dashboardSidebar(
     ),
     menuItem("Original Codes",
       icon = icon("file-code-o"),
-      href = "https://github.com/rstudio/shinydashboard/"
+      href = "https://github.com/kristinaxxo/final-project"
     )
   )
 )
