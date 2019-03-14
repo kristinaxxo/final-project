@@ -117,7 +117,7 @@ body <- dashboardBody(
     tabItem(tabName = "yinan",
             fluidRow(
               div(class = "yinan-head", h1("Create Your Own Graph"),
-                  h4(class = "yinan-head-body",
+                  p(class = "yinan-head-body",
                      "How have the relationship Between GDP and Suiside
                      Number changed over time?", br(),"How have GDP of countries
                      grew over time by continent?", br(), "What is the one question
@@ -165,7 +165,7 @@ body <- dashboardBody(
                 checkboxInput("facet", "Facet by Continent", value = FALSE)
               )
                    ),
-            h1("Predicting with Multivariable Regression Analysis"),
+            h2("Predicting with Multivariable Regression Analysis"),
             h2("What is Multivariable Regression Analysis"),
             p(class = "explain",
               "Multivariable Regression Analysis is the study of

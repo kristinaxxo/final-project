@@ -11,7 +11,7 @@ library("colormap")
 # Read in dataset from local desktop
 suicide <- read.csv("data/master.csv", stringsAsFactors = FALSE)
 
-# Graph of total suicide people country for introduction
+# Graph of top 10 countries with the most people killed from suicide 
 overview_analysis <- suicide %>%
   group_by(country) %>%
   summarize(
