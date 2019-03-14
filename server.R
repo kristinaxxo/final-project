@@ -1,12 +1,11 @@
-source("yinan.R")
-source("analysis.R")
 library(dplyr)
 library(ggplot2)
 library(shiny)
 library(plotly)
 library(reshape2)
 library(lintr)
-
+source("analysis.R")
+source("yinan.R")
 server <- function(input, output) {
   output$bargraph <- renderPlotly({
   overview

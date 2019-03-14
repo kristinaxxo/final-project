@@ -14,12 +14,11 @@ library(countrycode)
 # Question: based on the information form past x years, can you predict
 # the suicide number in next y years?
 suicide_data <- read_csv("data/master.csv")
+#suicide <- read.csv("data/master.csv", stringsAsFactors = FALSE)
 
 
 # predict the number of suiside that may happen with diferent input
 # input gdp, population,gdp per capita
-sum(is.na(suicide_data$`HDI for year`))
-suicide_data$have_HDI <- !is.na(suicide_data$`HDI for year`)
 country_year_group <- suicide_data %>%
   group_by(country, year) %>%
   summarise(
