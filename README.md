@@ -1,6 +1,7 @@
 # Final Project Proposal
 
 ## Project Description
+Link to shinyApp: https://kristinaxxo.shinyapps.io/final-project/
 
 1. What is the dataset you'll be working with?  Please include background on who collected the data, where you accessed it, and any additional information we should know about how this data came to be?
 
